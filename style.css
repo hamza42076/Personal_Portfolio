@@ -118,6 +118,9 @@ section {
     display: flex;
     align-items: center;
     padding: 0 9%;
+    max-width: 1400px;
+    /* width: 100%; */
+    margin: 0 auto;
     /* background: url(profile-pic.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -148,10 +151,11 @@ section {
     background-image: linear-gradient(var(--main-color), var(--main-color));
     background-repeat: no-repeat;
     -webkit-background-clip: text;
+    background-clip: text;
     background-position: -33rem 0;
     animation: homeBgText 6s linear infinite;
     animation-delay: 2s;
-} 
+}
 
 .home-content .text-animate h3::before{
     content: '';
@@ -266,19 +270,51 @@ section {
 .home-imgHover{
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: absolute;
+    justify-content: space-between;
+    /* position: absolute;
     top: 0;
-    right: 0;
-    width: 45%;
-    height: 100%;
+    right: 0; */
+    margin-top: 50px;
+    width: 100%;
+    height: 100vh;
     background: transparent;
     transition: 3s;
+    border-radius: 50%; /* Make it circular */
+    overflow: hidden; /* Ensure the image stays within the circular boundary */
+}
+
+.home-imgHover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio while filling the circle */
+    border-radius: 50%; /* Make the image circular */
+    transition: transform 0.3s ease; /* Add smooth transition for hover effect */
 }
 
 .home-imgHover:hover{
     background: var(--bg-color);
     opacity: .50;
+}
+
+/* Responsive adjustments for the profile image */
+@media (max-width: 1085px) {
+    .home-imgHover {
+        position: relative;
+        width: 25rem;
+        height: 25rem;
+        margin: 2rem auto 0 auto;
+        right: auto;
+    }
+
+    .home {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content {
+        width: 100%;
+        padding-top: 3rem;
+    }
 }
 
 .about{
@@ -309,10 +345,13 @@ span{
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* Ensure the image stays within the circular boundary */
 }
 
 .about-img img{
-    width: 90%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio while filling the circle */
     border-radius: 50%;
     border: .2rem solid var(--main-color);
 }
@@ -330,6 +369,25 @@ span{
     border-left: .2rem solid var(--main-color);
     border-right: .2rem solid var(--main-color);
     animation: aboutSpinner 8s linear infinite;
+}
+
+/* Responsive adjustments for the about section profile image */
+@media (max-width: 768px) {
+    .about-img {
+        width: 20rem;
+        height: 20rem;
+    }
+
+    .about {
+        padding: 5rem 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-img {
+        width: 15rem;
+        height: 15rem;
+    }
 }
 
 .about-content{
@@ -607,13 +665,15 @@ span{
     justify-content: center;
     align-items: center;
     padding: 3rem 0;
+    width: 100%;
+    overflow: hidden; /* Prevent horizontal scroll */
 }
 
 .carousel {
     position: relative;
-    width: 400px;
-    max-width: 1000px;
-    height: 300px;
+    width: 90%;
+    max-width: 800px; /* Reduced max width */
+    height: 350px; /* Increased height for better mobile viewing */
     overflow: hidden;
     border-radius: 15px;
     border: 2px solid var(--main-color);
@@ -632,41 +692,48 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
 }
 
 .carousel-item img {
     width: 100%;
-    height: 100%;
+    height: 60%;
+    max-height: 200px; /* Limit image height on mobile */
     padding: 8px;
     object-fit: cover;
     border-radius: 18px;
+    margin-bottom: 1rem;
 }
 
 .carousel-item h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--text-color);
     text-align: center;
+    margin: 1rem 0;
+    word-break: break-word; /* Allow text to wrap on small screens */
 }
 
 .btns-box-pro {
     position: relative;
     display: flex;
     justify-content: center;
-    width: 34.5rem;
-    height: 5rem;
+    width: 100%;
+    height: auto;
+    margin-top: 1rem;
 }
 
-.btns-box-pro .btns-pro{ 
+.btns-box-pro .btns-pro{
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 10rem;
-    height: 80%;
+    width: 12rem;
+    height: 4.5rem;
     background: var(--main-color);
     border: .2rem solid var(--main-color);
     border-radius: 30rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem; /* Smaller font for mobile */
     font-weight: 600;
     letter-spacing: .1rem;
     color: var(--bg-color);
@@ -689,13 +756,13 @@ span{
     background: var(--bg-color);
     z-index: -1;
     transition: .5s;
-} 
+}
 
 .btns-box-pro .btns-pro:hover::before{
     width: 100%;
 }
 
-
+/* Carousel navigation buttons */
 button {
     position: absolute;
     top: 50%;
@@ -703,8 +770,17 @@ button {
     background-color: var(--main-color);
     border: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px 15px; /* Larger touch targets for mobile */
     border-radius: 5px;
+    font-size: 1.8rem; /* Larger arrows */
+    color: var(--bg-color);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 .prev {
@@ -713,6 +789,154 @@ button {
 
 .next {
     right: 10px;
+}
+
+/* Additional responsive improvements */
+@media (max-width: 1200px) {
+    html {
+        font-size: 50%; /* Slightly smaller base font */
+    }
+
+    .home-imgHover {
+        width: 35%;
+    }
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 45%;
+    }
+
+    .home-imgHover {
+        width: 40%;
+    }
+}
+
+/* Mobile-specific carousel adjustments */
+@media (max-width: 768px) {
+    html {
+        font-size: 40%; /* Further reduce base font size */
+    }
+
+    .carousel {
+        height: 320px;
+        width: 95%;
+    }
+
+    .carousel-item h2 {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+    }
+
+    .btns-box-pro .btns-pro {
+        width: 10rem;
+        height: 4rem;
+        font-size: 1.4rem;
+    }
+
+    button {
+        padding: 10px 12px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 38%; /* Even smaller base font for very small screens */
+    }
+
+    .carousel {
+        height: 300px;
+    }
+
+    .carousel-item img {
+        height: 50%;
+        max-height: 150px;
+    }
+
+    .carousel-item h2 {
+        font-size: 1.8rem;
+    }
+
+    .btns-box-pro .btns-pro {
+        width: 9rem;
+        height: 3.5rem;
+        font-size: 1.3rem;
+    }
+
+    button {
+        padding: 8px 10px;
+        font-size: 1.3rem;
+    }
+
+    /* Additional small screen optimizations */
+    .home-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .home-content .text-animate h3 {
+        font-size: 1.8rem;
+    }
+
+    .heading {
+        font-size: 3.5rem;
+    }
+
+    .education-column .title {
+        font-size: 2rem;
+        margin: 0 0 1rem 1rem;
+    }
+
+    .education-content .content h3 {
+        font-size: 1.7rem;
+    }
+
+    .education-content .content p {
+        font-size: 1.3rem;
+    }
+
+    .skills-column .title {
+        font-size: 2rem;
+    }
+
+    .skills-content .progress h3 {
+        font-size: 1.4rem;
+    }
+
+    .contact form .input-box .input-field input,
+    .contact form .textarea-field textarea {
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
+}
+
+/* Extra small devices (phones, 320px and down) */
+@media (max-width: 320px) {
+    html {
+        font-size: 35%; /* Smallest base font size */
+    }
+
+    .carousel {
+        height: 280px;
+    }
+
+    .carousel-item h2 {
+        font-size: 1.6rem;
+    }
+
+    .btns-box-pro .btns-pro {
+        width: 8rem;
+        height: 3rem;
+        font-size: 1.2rem;
+    }
+
+    .home-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .heading {
+        font-size: 3rem;
+    }
 }
 
 .contact{
@@ -869,14 +1093,29 @@ button {
 
 @media (max-width: 1085px){
 
-    .home .home-imgHover img{
-        display: none;
-    }    
+    .home .home-imgHover {
+        position: relative;
+        width: 25rem;
+        height: 25rem;
+        margin: 2rem auto 0 auto;
+        right: auto;
+        top: auto;
+    }
+
+    .home {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .home-content {
+        width: 100%;
+        padding-top: 3rem;
+    }
 }
 
 
 @media (max-width: 991px) {
-    
+
     .header{
         padding: 2rem 4%;
     }
@@ -891,7 +1130,10 @@ button {
 
     .footer{
         padding: 2rem 4%;
+        flex-direction: column;
+        gap: 1.5rem;
     }
+
     .home-sci{
         width: 250px;
     }
@@ -901,15 +1143,44 @@ button {
         height: 38px;
     }
 
+    /* Education section responsiveness */
+    .education {
+        padding: 5rem 4%;
+    }
+
+    .education .education-row{
+        gap: 2rem;
+    }
+
+    .education-row .education-column{
+        flex: 1 1 100%; /* Make columns stack on smaller screens */
+    }
+
+    /* Skills section responsiveness */
+    .skills .skills-row{
+        gap: 2rem;
+    }
+
+    .skills .skills-column{
+        flex: 1 1 100%;
+    }
+
+    /* Contact form responsiveness */
+    .contact form .input-box .input-field{
+        width: 100%; /* Make input fields full width on smaller screens */
+        margin: 0.8rem 0;
+    }
 }
 
 @media (max-width: 768px){
     .header{
         background: var(--bg-color);
+        padding: 1.5rem 4%;
     }
 
     #menu-icon{
         display: block;
+        font-size: 2.8rem; /* Make menu icon larger for better touch targets */
     }
 
     .navbar{
@@ -918,86 +1189,110 @@ button {
         left: -100%;
         width: 100%;
         padding: 1rem 4%;
-        background: var(--main-color);
+        background: var(--bg-color); /* Changed to match header background */
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .2);
-        transition: .25s ease;
-        transition-delay: .25s;
-        z-index: 1;
+        transition: .3s ease;
+        z-index: 1000; /* Ensure it appears above other content */
     }
 
     .navbar.active{
-        transition-delay: 0s;
-        left: 0;
-}
-
-        .navbar .active-nav{
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-color);
-            border-top: .1rem solid rgba(0, 0, 0, .2);
-            z-index: -1;
-            transition: .25s ease;
-            transition-delay: 0s;
-        }
-
-     
-
-        .navbar.active .active-nav{
-            transition-delay: .25s;
-            left: 0;
-        }
-
-    
+        left: 0; /* Slide in from left */
+    }
 
     .navbar a{
         display: block;
-        font-size: 2rem;
-        margin: 3rem 0;
-        transition: .25s ease;
-        transition-delay: 0s;
-
+        font-size: 1.8rem; /* Slightly smaller font for mobile */
+        margin: 2rem 0;
+        padding: 0.5rem 0;
+        color: var(--text-color); /* Ensure text is visible */
     }
 
-    .navbar.active a{
-        
-        transition-delay: 25s;
+    .navbar a:hover,
+    .navbar a.active {
+        color: var(--main-color);
+        padding-left: 1rem; /* Indent on hover for visual feedback */
     }
 
     .home-imgHover{
         pointer-events: none;
     }
+
+    /* Improve mobile menu icon styling */
+    #menu-icon {
+        z-index: 1001; /* Ensure menu icon is above navbar */
+    }
+
+    /* Adjust home content for mobile */
+    .home-content h1{
+        font-size: 3.5rem; /* Smaller font size for mobile */
+        line-height: 1.2;
+    }
+
+    .home-content .text-animate h3{
+        font-size: 2.2rem; /* Smaller font size for mobile */
+    }
+
+    .home-content p{
+        font-size: 1.4rem; /* Smaller font size for mobile */
+    }
+
     .home-sci{
-        width: 250px;
+        width: 200px; /* Smaller social icons container */
     }
 
     .home-sci a{
-        width: 38px;
-        height: 38px;
+        width: 35px; /* Smaller social icons */
+        height: 35px;
+        font-size: 18px; /* Smaller icons */
     }
-   
 }
 
-@media (max-width: 768px){
+@media (max-width: 768px) and (max-width: 480px){
     html{
-        font-size: 50%;
+        font-size: 45%; /* Even smaller base font for very small screens */
     }
 
     .home-content h1{
-        display: flex;
-        flex-direction: column;
+        font-size: 3rem;
     }
 
-    .home-sci{
-        width: 250px;
+    .home-content .text-animate h3{
+        font-size: 2rem;
     }
 
-    .home-sci a{
-        width: 38px;
-        height: 38px;
+    .heading{
+        font-size: 4rem; /* Smaller heading for mobile */
     }
+
+    .about-content h3{
+        font-size: 2.2rem; /* Smaller heading for mobile */
+    }
+
+    .about-content p{
+        font-size: 1.4rem; /* Smaller paragraph for mobile */
+    }
+
+    .btn, .btns {
+        font-size: 1.5rem; /* Smaller button text for mobile */
+        height: 4rem;
+    }
+
+    .skills-content .progress h3{
+        font-size: 1.5rem; /* Smaller progress text for mobile */
+    }
+
+    .education-column .title{
+        font-size: 2.2rem; /* Smaller title for mobile */
+    }
+
+    .education-content .content h3{
+        font-size: 1.8rem; /* Smaller heading for mobile */
+    }
+
+    .education-content .content p{
+        font-size: 1.4rem; /* Smaller paragraph for mobile */
+    }
+}
 
     .carousel-item h2 {
         font-size: 3rem;
@@ -1007,8 +1302,6 @@ button {
         text-align: center;
     }
 
-    
-}
 
 @media (max-width: 462px){
     

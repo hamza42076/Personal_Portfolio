@@ -1,9 +1,10 @@
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
+// Toggle mobile menu
 menuIcon.onclick = () => {
-    menuIcon.classList.toggle('bx-x');  // Make sure bx-x class exists
-    navbar.classList.toggle('active');  // Ensure active class is defined in CSS
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
 }
 
 let sections = document.querySelectorAll('section');
@@ -31,6 +32,14 @@ window.onscroll = () => {
     menuIcon.classList.remove('bx-x');
     navbar.classList.remove('active');
 }
+
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.navbar a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuIcon.classList.remove('bx-x');
+        navbar.classList.remove('active');
+    });
+});
 
 
 
