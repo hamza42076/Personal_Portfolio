@@ -52,7 +52,7 @@ function openMail() {
   
     if (name1 && email1 && number1 && emailMessage1 && message1) {
   
-      window.location.href = "mailto:fcnashir@gmail.com";
+      window.location.href = "mailto:beelaal2024@gmail.com";
     }
   }
 
